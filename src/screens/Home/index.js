@@ -3,8 +3,9 @@ import {View, TextInput, StyleSheet, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import {useDispatch} from 'react-redux';
 import _ from 'lodash';
+import style from './style';
 
-const Home = (props) => {
+const Home = () => {
   const [asteroId, setAsteroId] = useState('');
   const [errMSg, setErrMsg] = useState('');
   const dispatch = useDispatch();
@@ -60,31 +61,4 @@ const Home = (props) => {
     </View>
   );
 };
-
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  inputWrapper: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: '80%',
-  },
-  errMSgStyle: {
-    width: '80%',
-    color: 'red',
-  },
-  buttonWrapper: {
-    width: 240,
-    marginTop: 40,
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-});
-
 export default Home;

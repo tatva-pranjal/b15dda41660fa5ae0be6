@@ -38,24 +38,27 @@ function* workerRandomId(action) {
     type: 'SHOW_PAGE_LOADER',
   });
   const randomId = yield apiService(endpoint.RANDOM_URL);
-  console.log('randomId', randomId.data.near_earth_objects);
-  const url = `${endpoint.API_URL}${randomId.data.near_earth_objects[0].id}?api_key=${API_TOKEN}`;
-  const asteroData = yield apiService(url);
-  if (asteroData && asteroData.success) {
-    yield put({
-      type: 'SET_RANDOM_ID_DETAIL',
-      payload: {
-        data: asteroData.data,
-      },
-    });
-    yield navigateTo('detailScreen');
+  if (randomId && randomId.success) {
+    const url = `${endpoint.API_URL}${randomId.data.near_earth_objects[0].id}?api_key=${API_TOKEN}`;
+    const asteroData = yield apiService(url);
+    if (asteroData && asteroData.success) {
+      yield put({
+        type: 'SET_RANDOM_ID_DETAIL',
+        payload: {
+          data: asteroData.data,
+        },
+      });
+      yield navigateTo('detailScreen');
+    } else {
+      yield put({
+        type: 'FAILED_TO_SET_DETAIL',
+        payload: {
+          errorObj: 'somethind went wrong',
+        },
+      });
+      yield alert('Some thing went wrong, Please try again');
+    }
   } else {
-    yield put({
-      type: 'FAILED_TO_SET_DETAIL',
-      payload: {
-        errorObj: 'somethind went wrong',
-      },
-    });
     yield alert('Some thing went wrong, Please try again');
   }
   yield put({type: 'HIDE_PAGE_LOADER'});

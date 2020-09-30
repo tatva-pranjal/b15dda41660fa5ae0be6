@@ -1,4 +1,3 @@
-import {act} from 'react-test-renderer';
 
 const initialState = {
   errMsg: '',
