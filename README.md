@@ -2,7 +2,7 @@
 
 Definition:
 
-Using country name get detail of country, also using captical of country get current weather for city
+USing asteroid id get the information about the asteroid
 
 Currently includes:
 
